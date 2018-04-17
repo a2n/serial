@@ -17,3 +17,8 @@
 [[constraint]]
   name = "github.com/golang/glog"
   branch = "master"
+
+[[constraint]]
+  name = "google.golang.org/grpc"
+  source = "https://github.com/grpc/grpc-go.git"
+  version = "1.11.3"
