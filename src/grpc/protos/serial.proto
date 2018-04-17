@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package serial;
+
+// 請求
+message Empty {}
+
+// 回應
+message Response {
+    uint64 No = 1;
+}
+
+// 服務
+service SerialServicee {
+    rpc Get(Empty) returns (Response) {}
+}
