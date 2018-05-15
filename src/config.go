@@ -9,18 +9,22 @@ import (
 	"github.com/pkg/errors"
 )
 
+// ConfigService 配置服務
 type ConfigService struct{}
 
+// NewConfigService 創建服務
 func NewConfigService() *ConfigService {
 	return &ConfigService{}
 }
 
+// Config 配置
 type Config struct {
 	Value uint64 `toml:"value"`
 	Port  string `toml:"port"`
 }
 
-func (this *ConfigService) Get() (*Config, error) {
+// Get 取得
+func (cs *ConfigService) Get() (*Config, error) {
 	b, e := ioutil.ReadFile("config/serial.toml")
 	if e != nil {
 		return nil, errors.Wrap(e, "")
@@ -35,9 +39,10 @@ func (this *ConfigService) Get() (*Config, error) {
 	return c, nil
 }
 
-func (this *ConfigService) Save(c *Config) error {
+// Save 保存
+func (cs *ConfigService) Save(c *Config) error {
 	if c == nil {
-		return errors.New("Nil config.")
+		return errors.New("nil config")
 	}
 
 	// Open file.

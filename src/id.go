@@ -4,26 +4,28 @@ import (
 	"sync/atomic"
 )
 
-type IdService struct {
+// IDService 識別服務
+type IDService struct {
 	id uint64
 }
 
-func NewIdService() *IdService {
-	return &IdService{}
+// NewIDService 創建服務
+func NewIDService() *IDService {
+	return &IDService{}
 }
 
-// Getting the value.
-func (this *IdService) Get() uint64 {
-	return atomic.LoadUint64(&this.id)
+// Get 取值
+func (is *IDService) Get() uint64 {
+	return atomic.LoadUint64(&is.id)
 }
 
-// Setting the value.
-func (this *IdService) Set(n uint64) {
-	atomic.StoreUint64(&this.id, n)
+// Set 設值
+func (is *IDService) Set(n uint64) {
+	atomic.StoreUint64(&is.id, n)
 }
 
-// Increasing the value by one.
-func (this *IdService) Increase() uint64 {
+// Increase 遞增
+func (is *IDService) Increase() uint64 {
 	// Math.MaxUint64++ -> 0
-	return atomic.AddUint64(&this.id, 1)
+	return atomic.AddUint64(&is.id, 1)
 }

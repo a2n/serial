@@ -13,13 +13,13 @@ import (
 
 // SerialServer 序號服務
 type SerialServer struct {
-	ids *serial.IdService
+	ids *serial.IDService
 }
 
 // NewSerialServer 創建序號服務
 func NewSerialServer() *SerialServer {
 	return &SerialServer{
-		ids: serial.NewIdService(),
+		ids: serial.NewIDService(),
 	}
 }
 
