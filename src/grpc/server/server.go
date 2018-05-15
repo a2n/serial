@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"flag"
 	"net"
 
 	"github.com/a2n/serial/src"
@@ -23,20 +22,19 @@ func NewSerialServer() *SerialServer {
 	}
 }
 
-// Port GRPC 埠號
-const Port string = ":57888"
-
 // Start 啟動
-func (ss *SerialServer) Start() {
-	flag.Parse()
-	l, e := net.Listen("tcp", Port)
+func (ss *SerialServer) Start(port string) {
+	if len(port) == 0 {
+		glog.Fatal("empty port")
+	}
+	l, e := net.Listen("tcp", port)
 	if e != nil {
 		glog.Fatalf("%+v", e)
 	}
 
 	srv := grpc.NewServer()
 	pb.RegisterSerialServiceeServer(srv, ss)
-	glog.Infof("Starting grpc server %s", Port)
+	glog.Infof("Starting grpc server %s", port)
 	glog.Fatalf("%+v", srv.Serve(l))
 }
 
