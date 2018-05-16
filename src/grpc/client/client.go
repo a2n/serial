@@ -5,7 +5,6 @@ import (
 	"time"
 
 	pb "github.com/a2n/serial/src/grpc/protos"
-	"github.com/a2n/serial/src/grpc/server"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )
@@ -29,7 +28,7 @@ func (c *Client) Dial(a string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 	var e error
-	c.conn, e = grpc.DialContext(ctx, server.Port, grpc.WithInsecure())
+	c.conn, e = grpc.DialContext(ctx, a, grpc.WithInsecure())
 	if e != nil {
 		return errors.Wrap(e, "")
 	}
