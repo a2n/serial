@@ -28,7 +28,7 @@ func (c *Client) Dial(a string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 	var e error
-	c.conn, e = grpc.DialContext(ctx, a, grpc.WithInsecure())
+	c.conn, e = grpc.DialContext(ctx, a, grpc.WithInsecure(), grpc.WithBlock())
 	if e != nil {
 		return errors.Wrap(e, "")
 	}
